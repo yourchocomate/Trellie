@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class WorkSpaceSeeder extends Seeder
+class WorkspaceSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class WorkSpaceSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\WorkSpace::factory(10)->create();
+        \App\Models\Workspace::factory(10)->create();
     }
 }
