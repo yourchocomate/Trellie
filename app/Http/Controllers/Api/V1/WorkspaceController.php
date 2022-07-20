@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\WorkSpace;
+use App\Models\Workspace;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Requests\Workspace\WorkSpaceStoreRequest;
@@ -30,7 +30,7 @@ class WorkspaceController extends Controller
 
     public function index()
     {
-        $workspaces = WorkSpace::where('user_id', auth()->id())->get();
+        $workspaces = Workspace::where('user_id', auth()->id())->get();
         return new WorkspaceCollection($workspaces);
     }
 
@@ -58,7 +58,7 @@ class WorkspaceController extends Controller
         $validated = $request->validated();
         $validated['user_id'] = auth()->id();
 
-        $workspace = WorkSpace::create($validated);
+        $workspace = Workspace::create($validated);
 
         return JsonResponse::success($workspace, "Workspace created successfully");
     }
@@ -72,7 +72,7 @@ class WorkspaceController extends Controller
     {
         $validated = $request->validated();
 
-        $workspace = WorkSpace::find($request->id)->update($request->except('id'));
+        $workspace = Workspace::find($request->id)->update($request->except('id'));
 
         return JsonResponse::success($workspace, "Workspace updated successfully");
     }
@@ -84,7 +84,7 @@ class WorkspaceController extends Controller
      */
     public function destroy(Request $request) 
     {
-        $workspace = WorkSpace::find($request->id)->delete();
+        $workspace = Workspace::find($request->id)->delete();
 
         if($workspace) return JsonResponse::success([], "Workspace deleted successfully");
 
