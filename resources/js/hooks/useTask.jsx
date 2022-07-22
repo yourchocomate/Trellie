@@ -1,11 +1,17 @@
 import { 
     useTaskCreate, 
     useTaskDelete, 
+    useTaskGet, 
     useTaskUpdate, 
 } from "../services/user";
 
 export const useTask = (formData, handleSuccess, handleFailure) => {
 
+    const getAllTasksByType = async(type = 0) => {
+        const res = await useTaskGet({type});
+        if(res && res.data && res.data.data) return res.data;
+        else return false;
+    }
 
     const createTask = async(e) => {
         e.preventDefault();
@@ -46,6 +52,7 @@ export const useTask = (formData, handleSuccess, handleFailure) => {
     return {
         createTask,
         updateTask,
-        deleteTask
+        deleteTask,
+        getAllTasksByType
     };
 }

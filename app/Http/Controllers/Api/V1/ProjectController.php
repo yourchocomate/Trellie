@@ -46,11 +46,13 @@ class ProjectController extends Controller
 
         // Check if filter by search
         else if($request->search) {
-            $projects[] = Project::with('user')
-                                ->whereHas('user', function($query) use ($request) {
-                                    $query->where('email', '=', $request->search)
-                                        ->orWhere('name', 'like', '%'.$request->search.'%');
-                                })->paginate(10,['*'],'page',$request->page);
+            $projects[] = Project::whereHas('user', function($query) use ($request) {
+                                        $query->where('email', '=', $request->search)
+                                            ->orWhere('name', 'like', '%'.$request->search.'%');
+                                    })
+                                    ->with('user', function($query) {
+                                        return $query->select('id','email');
+                                    })->paginate(10,['*'],'page',$request->page);
         } else {
             $projects[] = Project::whereJsonContains('peoples', auth()->id())->with('user', function($user) {
                                         return $user->select('id','email');

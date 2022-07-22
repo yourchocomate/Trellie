@@ -1,14 +1,14 @@
-import React, { Fragment, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
+import React, { Fragment, useState } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
 import {
   CalendarIcon,
   FolderIcon,
   HomeIcon,
   MenuIcon,
   XIcon,
-} from '@heroicons/react/outline'
-import { useAuth } from '../../hooks'
-import { useLocation, useNavigate } from 'react-router-dom'
+} from '@heroicons/react/outline';
+import { useAuth } from '../../hooks';
+import { Link, useLocation, useNavigate} from 'react-router-dom';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -17,12 +17,12 @@ function classNames(...classes) {
 const Sidebar = ({children}) => {
     const auth = useAuth();
     const navigate = useNavigate();
-    const [sidebarOpen, setSidebarOpen] = useState(false)
-    const location = useLocation()
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const location = useLocation();
     const navigation = [
       { name: 'Workspaces', href: '/dashboard', icon: HomeIcon, current: location.pathname == '/dashboard' || location.pathname.includes('workspace') ? true : false},
       { name: 'Projects', href: '/projects', icon: FolderIcon, current: location.pathname == '/projects' || location.pathname.includes('project') ? true : false },
-      { name: 'Tasks', href: '#', icon: CalendarIcon, current: location.pathname == '/tasks' ? true : false },
+      { name: 'Tasks', href: '/tasks', icon: CalendarIcon, current: location.pathname == '/tasks' ||  location.pathname.includes('tasks') ? true : false },
     ]
 
     return (
@@ -82,9 +82,9 @@ const Sidebar = ({children}) => {
                             </div>
                             <nav className="mt-5 px-2 space-y-1">
                             {navigation.map((item) => (
-                                <a
+                                <Link
                                 key={item.name}
-                                href={item.href}
+                                to={item.href}
                                 className={classNames(
                                     item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                                     'group flex items-center px-2 py-2 text-base font-medium rounded-md'
@@ -98,7 +98,7 @@ const Sidebar = ({children}) => {
                                     aria-hidden="true"
                                 />
                                 {item.name}
-                                </a>
+                                </Link>
                             ))}
                             </nav>
                         </div>
@@ -141,9 +141,9 @@ const Sidebar = ({children}) => {
                         </div>
                         <nav className="mt-5 flex-1 px-2 bg-gray-800 space-y-1">
                             {navigation.map((item) => (
-                            <a
+                            <Link
                                 key={item.name}
-                                href={item.href}
+                                to={item.href}
                                 className={classNames(
                                 item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                                 'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
@@ -157,7 +157,7 @@ const Sidebar = ({children}) => {
                                 aria-hidden="true"
                                 />
                                 {item.name}
-                            </a>
+                            </Link>
                             ))}
                         </nav>
                         </div>

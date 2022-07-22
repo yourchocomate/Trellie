@@ -5,7 +5,9 @@ module.exports = {
     "./resources/views/index.blade.php",
   ],
   theme: {
-    extend: {},
+    extend: {
+      visibility: ['group-hover'],
+    }
   },
   plugins: [
     require('@tailwindcss/forms'),

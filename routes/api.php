@@ -60,6 +60,7 @@ Route::prefix('project')->group(function () {
  * Task routes
  */
 Route::prefix('task')->group(function () {
+    Route::post('/all', 'TaskController@index');
     Route::post('create', 'TaskController@create');
     Route::post('update', 'TaskController@update');
     Route::post('delete', 'TaskController@destroy');

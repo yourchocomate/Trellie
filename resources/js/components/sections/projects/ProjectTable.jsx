@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { SearchIcon, UserIcon } from "@heroicons/react/outline";
+import { DocumentAddIcon, SearchIcon, UserIcon } from "@heroicons/react/outline";
 import { useAuth, useProject, useStateForm } from "../../../hooks";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const initialFormState = {
     from_date: '',
@@ -114,6 +115,12 @@ const PaginationTable = () => {
                                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <div className="flex flex-row"> 
                                             <div className="ml-5 flex flex-row text-gray-400">
+                                                <Link to={`/new-task/${project.id}`} className="group mr-2">
+                                                    <DocumentAddIcon className="h-5 w-5" aria-hidden="true" />
+                                                    <span className="group-hover:visible absolute rounded-md shadow-md text-white bg-gray-500 text-xs font-bold transition-all duration-100 p-2 text-center min-w-max invisible">
+                                                        Add new Task
+                                                    </span>
+                                                </Link>
                                                 <UserIcon className="h-5 w-5" aria-hidden="true" />
                                                 <span>{JSON.parse(project.peoples).length}</span>
                                             </div>

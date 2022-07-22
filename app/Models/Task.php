@@ -11,6 +11,19 @@ class Task extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'description',
+        'user_id',
+        'project_id',
+        'instruction'
+    ];
+
+    /**
      * Get the user that owns the Task
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

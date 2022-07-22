@@ -1,6 +1,24 @@
 import axios from "axios";
 import { logErr } from "../catch.error";
 
+
+const useTaskGet = async (data) => {
+    let response = [];
+    try {
+        response = await axios.post(`/api/task/all`, data,
+        {
+            headers: {
+                ContentType: 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+    } catch (err) {
+        return logErr(err);
+    }
+    return response;
+}
+
+
 const useTaskCreate = async (data) => {
     let response = [];
     try {
@@ -12,6 +30,7 @@ const useTaskCreate = async (data) => {
             }
         });
     } catch (err) {
+        if(err.response.status === 422) return err.response;
         return logErr(err);
     }
     return response;
@@ -28,6 +47,7 @@ const useTaskUpdate = async (data) => {
             }
         });
     } catch (err) {
+        if(err.response.status === 422) return err.response;
         return logErr(err);
     }
     return response;
@@ -44,9 +64,10 @@ const useTaskDelete = async (data) => {
             }
         });
     } catch (err) {
+        if(err.response.status === 422) return err.response;
         return logErr(err);
     }
     return response;
 }
 
-export { useTaskCreate, useTaskUpdate, useTaskDelete };
+export { useTaskGet,useTaskCreate, useTaskUpdate, useTaskDelete };

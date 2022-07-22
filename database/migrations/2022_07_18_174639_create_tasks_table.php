@@ -25,6 +25,9 @@ return new class extends Migration
                     ->onUpdate('cascade');
             $table->string('name', 200);
             $table->longText('description')->nullable();
+            $table->longText('instruction')->nullable();
+            $table->bigInteger('submitted_by')->nullable();
+            $table->tinyInt('status')->default(0);
             $table->timestamps();
         });
     }
