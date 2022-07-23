@@ -32,6 +32,10 @@ Run in development mode:
 
 Build frontend:
     `npm run build`
+    
+User account:
+Email: `test@example.com`
+Password: `password`
 
 ## [View postman documentation](https://documenter.getpostman.com/view/12014232/UzR1J2HB)
 ## License
